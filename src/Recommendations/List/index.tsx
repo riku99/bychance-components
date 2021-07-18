@@ -6,7 +6,7 @@ import { Recommendation } from "../../index";
 
 type Props = {
   listData: Recommendation[];
-  onItemPress: () => void;
+  onItemPress: (data: Recommendation) => void;
 };
 
 export const RecommendationList = React.memo(
@@ -16,7 +16,11 @@ export const RecommendationList = React.memo(
     const renderItem = useCallback(
       ({ item, index }: { item: Recommendation; index: number }) => (
         <View style={{ marginTop: 30 }}>
-          <Item key={item.id} item={item} onItemPress={onItemPress} />
+          <Item
+            key={item.id}
+            item={item}
+            onItemPress={() => onItemPress(item)}
+          />
         </View>
       ),
       []
