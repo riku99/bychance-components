@@ -28,7 +28,7 @@ export const Item = React.memo(({ item, onItemPress }: Props) => {
             />
             <Text style={styles.name}>{item.name}</Text>
           </View>
-          <Text style={styles.coupon}>{item.coupon && "※クーポンあり!✨"}</Text>
+          {item.coupon && <Text style={styles.coupon}>※クーポンあり!✨</Text>}
           <View style={styles.distanceAndIconContainer}>
             <Text>{item.distance && item.distance + "m"}</Text>
             <SocialIcons instagram={item.instagram} twitter={item.twitter} />
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
   },
   imageAndNameContainer: {
-    marginTop: 9,
+    marginTop: 13,
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   coupon: {
     fontSize: 14,
-    marginTop: 5,
+    marginTop: 13,
     color: "gray",
   },
   distanceAndIconContainer: {
