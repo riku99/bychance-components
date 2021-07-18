@@ -41,10 +41,12 @@ export const RecommendationDetail = React.memo(({ data }: Props) => {
             iconSize={19}
           />
         </View>
-        <Text style={styles.address}>{data.address}</Text>
-        <View style={styles.mapContainer}>
-          <Map lat={data.lat} lng={data.lng} />
-        </View>
+        {data.address && <Text style={styles.address}>{data.address}</Text>}
+        {data.lat && data.lng && (
+          <View style={styles.mapContainer}>
+            <Map lat={data.lat} lng={data.lng} />
+          </View>
+        )}
       </View>
     </View>
   );

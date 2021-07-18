@@ -10,9 +10,9 @@ export type Recommendation = {
   url: string | null;
   instagram: string | null;
   twitter: string | null;
-  address: string;
-  lat: number;
-  lng: number;
+  address: string | null;
+  lat: number | null;
+  lng: number | null;
 };
 
 export { RecommendationList } from "./Recommendations/List";
