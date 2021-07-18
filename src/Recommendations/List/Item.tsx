@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Platform, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Avatar } from "react-native-elements";
 
 import { Images } from "./Images";
@@ -14,7 +14,9 @@ type Props = {
 export const Item = React.memo(({ item, onItemPress }: Props) => {
   return (
     <View style={styles.mainSection}>
-      <Images images={item.images} />
+      <View style={styles.imagesContainer}>
+        <Images images={item.images} />
+      </View>
       <TouchableOpacity activeOpacity={1} onPress={onItemPress}>
         <View style={styles.introContainer}>
           <Text style={styles.title}>{item.title}</Text>
@@ -37,8 +39,6 @@ export const Item = React.memo(({ item, onItemPress }: Props) => {
   );
 });
 
-const itemHeight = Platform.OS === "ios" ? 370 : 390;
-
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   mainSection: {
-    height: itemHeight,
     width: "100%",
     backgroundColor: "white",
     borderRadius: 5,
@@ -96,5 +95,8 @@ const styles = StyleSheet.create({
   },
   icons: {
     flexDirection: "row",
+  },
+  imagesContainer: {
+    height: 200,
   },
 });
