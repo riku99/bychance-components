@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2017"],
+    "module": "commonjs",
+    "jsx": "react",
+    "moduleResolution": "node",
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "declaration": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}
