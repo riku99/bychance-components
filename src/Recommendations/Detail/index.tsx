@@ -6,12 +6,19 @@ import { Images } from "./Images";
 import { SocialIcons } from "./SocialIcons";
 import { Map } from "./Map";
 import { Recommendation } from "../../index";
+import { goLink } from "../../utils";
 
 type Props = {
   data: Recommendation;
 };
 
 export const RecommendationDetail = React.memo(({ data }: Props) => {
+  const onUrlPress = () => {
+    if (data.url) {
+      goLink(data.url);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.imagesContainer}>
@@ -29,7 +36,7 @@ export const RecommendationDetail = React.memo(({ data }: Props) => {
           <Text style={styles.name}>{data.name}</Text>
         </View>
         <Text style={styles.text}>{data.text}</Text>
-        <TouchableOpacity activeOpacity={1}>
+        <TouchableOpacity activeOpacity={1} onPress={onUrlPress}>
           <Text style={styles.url}>{data.url}</Text>
         </TouchableOpacity>
         <View style={styles.socialIcons}>

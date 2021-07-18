@@ -2,28 +2,16 @@ import React from "react";
 import { View, StyleSheet, Alert, Linking } from "react-native";
 import { SocialIcon } from "react-native-elements";
 
+import { goLink } from "../../utils";
+
 type Props = {
   instagram: string | null;
   twitter: string | null;
 };
 
-const notSupportedAlert = () => {
-  Alert.alert("無効なURLです", "");
-};
-
 export const SocialIcons = React.memo(({ instagram, twitter }: Props) => {
   const onPress = async (link: string) => {
-    try {
-      const supported = await Linking.canOpenURL(link);
-
-      if (supported) {
-        await Linking.openURL(link);
-      } else {
-        notSupportedAlert();
-      }
-    } catch (e) {
-      notSupportedAlert();
-    }
+    goLink(link);
   };
 
   return (
