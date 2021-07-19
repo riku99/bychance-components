@@ -7,10 +7,11 @@ import { Recommendation } from "../../index";
 type Props = {
   listData: Recommendation[];
   onItemPress: (data: Recommendation) => void;
+  refreshControl?: React.ReactElement;
 };
 
 export const RecommendationList = React.memo(
-  ({ listData, onItemPress }: Props) => {
+  ({ listData, onItemPress, refreshControl }: Props) => {
     const flatListRef = useRef<FlatList>(null);
 
     const renderItem = useCallback(
@@ -38,6 +39,7 @@ export const RecommendationList = React.memo(
             initialNumToRender={3}
             windowSize={8}
             maxToRenderPerBatch={4}
+            refreshControl={refreshControl ? refreshControl : undefined}
           />
         </SafeAreaView>
       </View>
