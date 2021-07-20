@@ -11,8 +11,7 @@ type Props = {
 
 export const SocialIcons = React.memo(({ instagram, twitter }: Props) => {
   const onPress = async (link: string) => {
-    const _link = `https://www.instagram.com/${link}/`;
-    goLink(_link);
+    goLink(link);
   };
 
   return (
@@ -23,7 +22,7 @@ export const SocialIcons = React.memo(({ instagram, twitter }: Props) => {
           style={{ width: 30, height: 30, backgroundColor: "pink" }}
           iconSize={17}
           underlayColor="pink"
-          onPress={() => onPress(instagram)}
+          onPress={() => onPress(`https://www.instagram.com/${instagram}/`)}
         />
       )}
       {twitter && (
@@ -31,7 +30,7 @@ export const SocialIcons = React.memo(({ instagram, twitter }: Props) => {
           type="twitter"
           style={{ width: 30, height: 30 }}
           iconSize={17}
-          onPress={() => onPress(twitter)}
+          onPress={() => onPress(`https://twitter.com/${twitter}`)}
         />
       )}
     </View>

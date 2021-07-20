@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Alert, Linking } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { SocialIcon } from "react-native-elements";
 
 import { goLink } from "../../utils";
@@ -12,10 +12,6 @@ type Props = {
   iconSize?: number;
 };
 
-const notSupportedAlert = () => {
-  Alert.alert("無効なURLです", "");
-};
-
 export const SocialIcons = React.memo(
   ({
     instagram,
@@ -25,8 +21,7 @@ export const SocialIcons = React.memo(
     iconSize = 17,
   }: Props) => {
     const onPress = async (link: string) => {
-      const _link = `https://www.instagram.com/${link}/`;
-      goLink(_link);
+      goLink(link);
     };
 
     return (
@@ -41,7 +36,7 @@ export const SocialIcons = React.memo(
             }}
             iconSize={iconSize}
             underlayColor="pink"
-            onPress={() => onPress(instagram)}
+            onPress={() => onPress(`https://www.instagram.com/${instagram}/`)}
           />
         )}
         {twitter && (
@@ -49,7 +44,7 @@ export const SocialIcons = React.memo(
             type="twitter"
             style={{ width: iconWidth, height: iconHeight }}
             iconSize={iconSize}
-            onPress={() => onPress(twitter)}
+            onPress={() => onPress(`https://twitter.com/${twitter}`)}
           />
         )}
       </View>
