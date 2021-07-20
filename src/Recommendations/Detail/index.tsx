@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { Avatar } from "react-native-elements";
 
 import { Images } from "./Images";
@@ -59,6 +65,9 @@ export const RecommendationDetail = React.memo(({ data }: Props) => {
   );
 });
 
+const { width } = Dimensions.get("screen");
+const imageHeight = (width / 3) * 2;
+
 const styles = StyleSheet.create({
   container: {
     width: "100%",
@@ -66,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   imagesContainer: {
-    height: 250,
+    height: imageHeight,
     width: "100%",
   },
   introContainer: {

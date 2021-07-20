@@ -5,6 +5,7 @@ import { Text, Avatar } from "react-native-elements";
 import { Images } from "./Images";
 import { SocialIcons } from "./SocialIcons";
 import { Recommendation } from "../../index";
+import { itemWidth } from "./index";
 
 type Props = {
   item: Recommendation;
@@ -39,17 +40,13 @@ export const Item = React.memo(({ item, onItemPress }: Props) => {
   );
 });
 
+const imageHeight = (itemWidth / 3) * 2;
+
 const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
     backgroundColor: "white",
-  },
-  contents: {
-    width: "100%",
-    height: "100%",
-    paddingHorizontal: 10,
-    marginTop: 20,
   },
   mainSection: {
     width: "100%",
@@ -97,6 +94,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   imagesContainer: {
-    height: 200,
+    height: imageHeight,
   },
 });
