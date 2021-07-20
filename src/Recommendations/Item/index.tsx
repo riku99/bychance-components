@@ -43,11 +43,6 @@ export const RecommendationItem = React.memo(({ item, onItemPress }: Props) => {
 const imageHeight = (itemWidth / 3) * 2;
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    backgroundColor: "white",
-  },
   mainSection: {
     width: "100%",
     backgroundColor: "white",
