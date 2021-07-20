@@ -2,17 +2,17 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, Avatar } from "react-native-elements";
 
-import { Images } from "./Images";
-import { SocialIcons } from "./SocialIcons";
+import { Images } from "../List/Images";
+import { SocialIcons } from "../List/SocialIcons";
 import { Recommendation } from "../../index";
-import { itemWidth } from "./index";
+import { itemWidth } from "../List/index";
 
 type Props = {
   item: Recommendation;
   onItemPress: () => void;
 };
 
-export const Item = React.memo(({ item, onItemPress }: Props) => {
+export const RecommendationItem = React.memo(({ item, onItemPress }: Props) => {
   return (
     <View style={styles.mainSection}>
       <View style={styles.imagesContainer}>

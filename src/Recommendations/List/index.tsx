@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 
-import { Item } from "./Item";
+import { RecommendationItem } from "../Item";
 import { Recommendation } from "../../index";
 
 type Props = {
@@ -23,7 +23,7 @@ export const RecommendationList = React.memo(
     const renderItem = useCallback(
       ({ item, index }: { item: Recommendation; index: number }) => (
         <View style={{ marginTop: 30 }}>
-          <Item
+          <RecommendationItem
             key={item.id}
             item={item}
             onItemPress={() => onItemPress(item)}

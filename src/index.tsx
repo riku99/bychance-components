@@ -17,3 +17,4 @@ export type Recommendation = {
 
 export { RecommendationList } from "./Recommendations/List";
 export { RecommendationDetail } from "./Recommendations/Detail";
+export { RecommendationItem } from "./Recommendations/Item";
