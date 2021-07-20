@@ -1,5 +1,11 @@
 import React, { useCallback, useRef } from "react";
-import { View, StyleSheet, SafeAreaView, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  Dimensions,
+} from "react-native";
 
 import { Item } from "./Item";
 import { Recommendation } from "../../index";
@@ -47,14 +53,19 @@ export const RecommendationList = React.memo(
   }
 );
 
+const { width } = Dimensions.get("screen");
+
+const paddingHorizontal = 10;
+export const itemWidth = width - paddingHorizontal;
+
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
+    width: itemWidth,
     height: "100%",
     backgroundColor: "white",
   },
   contents: {
     paddingBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal,
   },
 });
