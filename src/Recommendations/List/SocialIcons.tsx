@@ -11,7 +11,8 @@ type Props = {
 
 export const SocialIcons = React.memo(({ instagram, twitter }: Props) => {
   const onPress = async (link: string) => {
-    goLink(link);
+    const _link = `https://www.instagram.com/${link}/`;
+    goLink(_link);
   };
 
   return (
