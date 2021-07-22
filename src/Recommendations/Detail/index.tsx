@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
   Dimensions,
+  Animated,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
 } from "react-native";
 import { Avatar } from "react-native-elements";
 
@@ -25,48 +29,74 @@ export const RecommendationDetail = React.memo(({ data }: Props) => {
     }
   };
 
+  const imageScale = useRef(new Animated.Value(1)).current;
+  const imageY = useRef(new Animated.Value(0)).current;
+
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const value = e.nativeEvent.contentOffset.y;
+    if (value < 0) {
+      imageScale.setValue(1 + -value / 130);
+      imageY.setValue(0);
+    }
+    if (value >= 0) {
+      imageY.setValue(-value);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.imagesContainer}>
+      <Animated.View
+        style={[
+          styles.imagesContainer,
+          { transform: [{ scale: imageScale }, { translateY: imageY }] },
+        ]}
+      >
         <Images images={data.images} />
-      </View>
-      <View style={styles.introContainer}>
-        <Text style={styles.title}>{data.title}</Text>
-        <View style={styles.imageAndNameContainer}>
-          <Avatar
-            source={{
-              uri: data.avatar ? data.avatar : undefined,
-            }}
-            rounded
-          />
-          <Text style={styles.name}>{data.name}</Text>
-        </View>
-        <Text style={styles.text}>{data.text}</Text>
-        <TouchableOpacity activeOpacity={1} onPress={onUrlPress}>
-          <Text style={styles.url}>{data.url}</Text>
-        </TouchableOpacity>
-        <View style={styles.socialIcons}>
-          <SocialIcons
-            instagram={data.instagram}
-            twitter={data.twitter}
-            iconWidth={35}
-            iconHeight={35}
-            iconSize={19}
-          />
-        </View>
-        {data.address && <Text style={styles.address}>{data.address}</Text>}
-        {data.lat && data.lng && (
-          <View style={styles.mapContainer}>
-            <Map lat={data.lat} lng={data.lng} />
+      </Animated.View>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 60 }}
+        scrollEventThrottle={16}
+        onScroll={onScroll}
+      >
+        <View style={styles.introContainer}>
+          <Text style={styles.title}>{data.title}</Text>
+          <View style={styles.imageAndNameContainer}>
+            <Avatar
+              source={{
+                uri: data.avatar ? data.avatar : undefined,
+              }}
+              rounded
+            />
+            <Text style={styles.name}>{data.name}</Text>
           </View>
-        )}
-      </View>
+          <Text style={styles.text}>{data.text}</Text>
+          <TouchableOpacity activeOpacity={1} onPress={onUrlPress}>
+            <Text style={styles.url}>{data.url}</Text>
+          </TouchableOpacity>
+          <View style={styles.socialIcons}>
+            <SocialIcons
+              instagram={data.instagram}
+              twitter={data.twitter}
+              iconWidth={35}
+              iconHeight={35}
+              iconSize={19}
+            />
+          </View>
+          {data.address && <Text style={styles.address}>{data.address}</Text>}
+          {data.lat && data.lng && (
+            <View style={styles.mapContainer}>
+              <Map lat={data.lat} lng={data.lng} />
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </View>
   );
 });
 
 const { width } = Dimensions.get("screen");
 const imageHeight = (width / 3) * 2;
+const paddingTop = imageHeight + 30;
 
 const styles = StyleSheet.create({
   container: {
@@ -77,11 +107,12 @@ const styles = StyleSheet.create({
   imagesContainer: {
     height: imageHeight,
     width: "100%",
+    zIndex: 1,
   },
   introContainer: {
     width: "100%",
     paddingHorizontal: 10,
-    marginTop: 30,
+    paddingTop,
   },
   imageAndNameContainer: {
     flexDirection: "row",
