@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
     height: imageHeight,
     width: "100%",
     zIndex: 1,
+    position: "absolute",
   },
   introContainer: {
     width: "100%",
