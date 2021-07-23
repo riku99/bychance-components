@@ -29,7 +29,7 @@ export const RecommendationItem = React.memo(({ item, onItemPress }: Props) => {
             />
             <Text style={styles.name}>{item.name}</Text>
           </View>
-          {item.coupon && <Text style={styles.coupon}>※クーポンあり!✨</Text>}
+          {item.coupon && <Text style={styles.coupon}>✨クーポンあり✨</Text>}
           <View style={styles.distanceAndIconContainer}>
             <Text>{item.distance && item.distance + "m"}</Text>
             <SocialIcons instagram={item.instagram} twitter={item.twitter} />
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   coupon: {
     fontSize: 14,
     marginTop: 13,
-    color: "gray",
+    color: "#4f4f4f",
+    fontWeight: "bold",
   },
   distanceAndIconContainer: {
     flexDirection: "row",
