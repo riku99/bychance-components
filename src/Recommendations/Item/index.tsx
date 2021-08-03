@@ -1,11 +1,10 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { Text, Avatar } from "react-native-elements";
 
 import { Images } from "../List/Images";
 import { SocialIcons } from "../List/SocialIcons";
 import { Recommendation } from "../../index";
-import { itemWidth } from "../List/index";
 
 type Props = {
   item: Recommendation;
@@ -40,6 +39,10 @@ export const RecommendationItem = React.memo(({ item, onItemPress }: Props) => {
   );
 });
 
+const { width } = Dimensions.get("screen");
+
+const paddingHorizontal = 10;
+const itemWidth = width - paddingHorizontal;
 const imageHeight = (itemWidth / 3) * 2;
 
 const styles = StyleSheet.create({
