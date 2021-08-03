@@ -24,7 +24,6 @@ export const RecommendationList = React.memo(
       ({ item, index }: { item: Recommendation; index: number }) => (
         <View style={{ marginTop: 30 }}>
           <RecommendationItem
-            key={item.id}
             item={item}
             onItemPress={() => onItemPress(item)}
           />
@@ -39,6 +38,7 @@ export const RecommendationList = React.memo(
           <FlatList
             ref={flatListRef}
             data={listData}
+            keyExtractor={({ id }) => id.toString()}
             renderItem={renderItem}
             contentContainerStyle={styles.contents}
             scrollEnabled
