@@ -1,11 +1,5 @@
-import React, { useCallback, useRef } from "react";
-import {
-  View,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  Dimensions,
-} from "react-native";
+import React, { useCallback, useRef, ComponentProps } from "react";
+import { View, StyleSheet, FlatList, Dimensions } from "react-native";
 
 import { RecommendationItem } from "../Item";
 import { Recommendation } from "../../index";
@@ -14,15 +8,19 @@ type Props = {
   listData: Recommendation[];
   onItemPress: (data: Recommendation) => void;
   refreshControl?: React.ReactElement;
+  flatListProps: Omit<
+    ComponentProps<typeof FlatList>,
+    "data" | "renderItem" | "keyExtractor" | "getItem"
+  >;
 };
 
 export const RecommendationList = React.memo(
-  ({ listData, onItemPress, refreshControl }: Props) => {
+  ({ listData, onItemPress, refreshControl, flatListProps }: Props) => {
     const flatListRef = useRef<FlatList>(null);
 
     const renderItem = useCallback(
       ({ item, index }: { item: Recommendation; index: number }) => (
-        <View style={{ marginTop: 30 }}>
+        <View style={{ marginTop: index === 0 ? 10 : 30 }}>
           <RecommendationItem
             item={item}
             onItemPress={() => onItemPress(item)}
@@ -34,20 +32,19 @@ export const RecommendationList = React.memo(
 
     return (
       <View style={styles.container}>
-        <SafeAreaView>
-          <FlatList
-            ref={flatListRef}
-            data={listData}
-            keyExtractor={({ id }) => id.toString()}
-            renderItem={renderItem}
-            contentContainerStyle={styles.contents}
-            scrollEnabled
-            initialNumToRender={3}
-            windowSize={8}
-            maxToRenderPerBatch={4}
-            refreshControl={refreshControl ? refreshControl : undefined}
-          />
-        </SafeAreaView>
+        <FlatList
+          ref={flatListRef}
+          data={listData}
+          keyExtractor={({ id }) => id.toString()}
+          renderItem={renderItem}
+          contentContainerStyle={styles.contents}
+          scrollEnabled
+          initialNumToRender={3}
+          windowSize={8}
+          maxToRenderPerBatch={4}
+          refreshControl={refreshControl ? refreshControl : undefined}
+          {...flatListProps}
+        />
       </View>
     );
   }
