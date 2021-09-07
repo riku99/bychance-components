@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -45,6 +45,20 @@ export const RecommendationDetail = React.memo(
       }
     };
 
+    const renderText = useCallback((text: string) => {
+      return text.split(/(\s)/g).map((item, i) => {
+        if (/[#＃][Ａ-Ｚａ-ｚA-Za-z一-鿆0-9０-９ぁ-ヶｦ-ﾟー._-]+/gm.test(item)) {
+          return (
+            <Text key={i} style={{ color: "#00376b" }}>
+              {item}
+            </Text>
+          );
+        } else {
+          return item;
+        }
+      });
+    }, []);
+
     return (
       <View style={styles.container}>
         <Animated.View
@@ -71,7 +85,7 @@ export const RecommendationDetail = React.memo(
               />
               <Text style={styles.name}>{data.name}</Text>
             </View>
-            <Text style={styles.text}>{data.text}</Text>
+            <Text style={styles.text}>{renderText(data.text)}</Text>
             <TouchableOpacity activeOpacity={1} onPress={onUrlPress}>
               <Text style={styles.url}>{data.url}</Text>
             </TouchableOpacity>
